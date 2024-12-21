@@ -5,7 +5,7 @@ export type Music = any
 
 interface Store {
     music: Music[]
-    convertMusic: (music) => void
+    convertMusic: (music: Music) => Music
 }
 
 export const useMusicStore = create<Store>()(

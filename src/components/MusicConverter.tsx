@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { Music, useMusicStore } from '../state/useMusicStore.ts';
+import withAuth from './hoc/withAuth.tsx';
 
 const MusicConverter: React.FC = () => {
   const convertMusic = useMusicStore((state) => state.convertMusic)
@@ -37,4 +38,4 @@ const MusicConverter: React.FC = () => {
   );
 };
 
-export default MusicConverter;
+export default withAuth(MusicConverter);

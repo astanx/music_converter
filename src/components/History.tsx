@@ -1,9 +1,9 @@
 import React from "react";
 import { useMusicStore } from "../state/useMusicStore.ts";
+import withAuth from "./hoc/withAuth.tsx";
 
 const History = () => {
   const music = useMusicStore((state) => state.music);
-
   return (
     <div className="container mt-5">
       <h1 className="text-center">История</h1>
@@ -20,4 +20,4 @@ const History = () => {
   );
 };
 
-export default History;
+export default withAuth(History);
