@@ -4,6 +4,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import MusicConverter from "./components/MusicConverter.tsx";
 import History from "./components/History.tsx";
 import Login from "./components/Login.tsx";
+import Register from "./components/Register.tsx";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/music_converter" element={<MusicConverter />} />
         <Route path="/history" element={<History />} />
         <Route path="/login" element={<Login />}/>
+        <Route path="/register" element={<Register />}/>
       </Routes>
     </div>
   );

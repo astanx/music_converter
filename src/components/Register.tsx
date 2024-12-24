@@ -3,13 +3,13 @@ import { useForm } from "react-hook-form";
 import { useUserStore } from "../state/useUserStore.ts";
 import { useNavigate, Link } from "react-router-dom";
 
-const Login = () => {
+const Register = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const loginUser = useUserStore((state) => state.loginUser);
+  const registerUser = useUserStore((state) => state.registerUser);
   const isLogined = useUserStore((state) => state.isLogined);
   const navigate = useNavigate();
   useEffect(() => {
@@ -19,12 +19,14 @@ const Login = () => {
   }, [isLogined, navigate]);
 
   const submit = (data) => {
-    loginUser(data.userName, data.password);
+    // проверка наличия пользователя
+
+    registerUser(data.userName, data.password);
   };
 
   return (
     <div className="container mt-5">
-      <h2 className="text-center">Войти в систему</h2>
+      <h2 className="text-center">Зарегистрироваться</h2>
       <form onSubmit={handleSubmit(submit)}>
         <div className="mb-3">
           <label htmlFor="userName" className="form-label">
@@ -62,14 +64,14 @@ const Login = () => {
         </div>
 
         <button type="submit" className="btn btn-primary w-100">
-          Войти
+          Зарегистрироваться
         </button>
       </form>
       <div className="text-center mt-3">
-        <Link to="/register">Нету аккаунта? Зарегистрироваться</Link>
+        <Link to="/login">Есть аккаунт? Войти</Link>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Register;
