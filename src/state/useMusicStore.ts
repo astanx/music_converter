@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
+import { ConverterAPI } from "../api/music_converter_api.ts";
 
 export type Music = any 
 
@@ -12,10 +13,11 @@ export const useMusicStore = create<Store>()(
   persist(
     (set) => ({
         music: [],
-        convertMusic: (music: Music) => {     
+        convertMusic: async(music: Music) => {     
             if (music){
                 // логика конвертации
-                music = 'Заглушка'
+                const response = await ConverterAPI.convertMusic(music)
+                music = response.data.music
                 set((state) => ({music: [...state.music, music]}))
                 return music
             }
