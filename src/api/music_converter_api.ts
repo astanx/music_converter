@@ -1,33 +1,35 @@
 import axios from "axios";
 import { Music } from "../state/useMusicStore";
 
-const intense = axios.create({
+const intenseJSON = axios.create({
   baseURL: "http://127.0.0.1:8000",
   headers: {
     "Content-Type": "application/json",
   },
 });
+const intenseFORM = axios.create({
+  baseURL: "http://127.0.0.1:8000",
+});
 
 export const ConverterAPI = {
   registerUser: async (name: string, password: string) => {
-    const response = await intense.post("/users", { name, password });
+    const response = await intenseJSON.post("/users", { name, password });
     return response;
   },
   login: async (name: string, password: string) => {
-    const response = await intense.post("/login", { name, password });
+    const response = await intenseJSON.post("/login", { name, password });
     return response;
   },
   convertMusic: async (music: Music) => {
+    console.log(music);
+    
     const formData = new FormData();
     formData.append("file", music);
-    debugger
-    console.log(formData);
-    
-    const response = await intense.post("/music_converter", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
+    formData.forEach((value, key) => {
+      console.log(key, value);
     });
+    
+    const response = await intenseFORM.post("/music_converter", formData);
     return response
   },
 };

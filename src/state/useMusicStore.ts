@@ -15,9 +15,10 @@ export const useMusicStore = create<Store>()(
         music: [],
         convertMusic: async(music: Music) => {     
             if (music){
-                // логика конвертации
                 const response = await ConverterAPI.convertMusic(music)
-                music = response.data.music
+                music = response.data
+                console.log(music);
+                
                 set((state) => ({music: [...state.music, music]}))
                 return music
             }

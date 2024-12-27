@@ -8,7 +8,7 @@ interface Store {
   isLogined: boolean;
   loginUser: (userName: string, password: string) => void;
   registerUser: (userName: string, password: string) => void;
-  signOut: () => void;
+  logoutUser: () => void;
 }
 
 export const useUserStore = create<Store>()(
@@ -31,7 +31,7 @@ export const useUserStore = create<Store>()(
         const userId = response.data.id;
         set(() => ({ userName: name, userId, isLogined: true }));
       },
-      signOut: () =>
+      logoutUser: () =>
         set(() => ({ userName: "", userId: "", isLogined: false })),
     }),
     {
