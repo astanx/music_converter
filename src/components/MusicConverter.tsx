@@ -6,13 +6,16 @@ import { useUserStore } from "../state/useUserStore.ts";
 const MusicConverter: React.FC = () => {
   const convertMusic = useMusicStore((state) => state.convertMusic);
   const [music, setMusic] = useState<Music[]>([]);
+  const [isConverting, setIsConverting] = useState(false);
   const [convertedMusic, setConvertedMusic] = useState("");
   const userId = useUserStore((state) => state.userId)
 
   const handleConvertMusic = async () => {
     if (music.length > 0) {
+      setIsConverting(true)
       setConvertedMusic(await convertMusic(music, userId));
       setMusic([])
+      setIsConverting(false)
     }
   };
   const handleFileChange = (e) => {
@@ -40,6 +43,7 @@ const MusicConverter: React.FC = () => {
           <button
             className="btn btn-primary btn-block"
             onClick={handleConvertMusic}
+            disabled={isConverting}
           >
             Конвертировать
           </button>

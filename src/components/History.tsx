@@ -9,9 +9,14 @@ const History = () => {
       <h1 className="text-center">История</h1>
       <div className="list-group mt-4">
       {music.length > 0 ? music.map(mus => (
-          <a href="#" className="list-group-item list-group-item-action">
-            {mus}
-          </a>
+          <audio id="audioPlayer" controls key={mus}>
+          <source
+            id="audioSource"
+            src={mus}
+            type="audio/wav"
+          />
+          Ваш браузер не поддерживает аудиоплеер.
+        </audio>
       )) : (
         <h2 className="text-center">Начните преобразовывать музыку</h2>
       )}
