@@ -19,8 +19,6 @@ const Register = () => {
   }, [isLogined, navigate]);
 
   const submit = (data) => {
-    // проверка наличия пользователя
-
     registerUser(data.userName, data.password);
   };
 

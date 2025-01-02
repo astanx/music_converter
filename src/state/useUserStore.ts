@@ -4,7 +4,7 @@ import { ConverterAPI } from "../api/music_converter_api.ts";
 
 interface Store {
   userName: string;
-  userId: string;
+  userId: number;
   isLogined: boolean;
   loginUser: (userName: string, password: string) => void;
   registerUser: (userName: string, password: string) => void;
@@ -15,7 +15,7 @@ export const useUserStore = create<Store>()(
   persist(
     (set) => ({
       userName: "",
-      userId: "",
+      userId: 0,
       isLogined: false,
       loginUser: async (userName: string, password: string) => {
         const response = await ConverterAPI.login(userName, password);
@@ -32,7 +32,7 @@ export const useUserStore = create<Store>()(
         set(() => ({ userName: name, userId, isLogined: true }));
       },
       logoutUser: () =>
-        set(() => ({ userName: "", userId: "", isLogined: false })),
+        set(() => ({ userName: "", userId: 0, isLogined: false })),
     }),
     {
       name: "user-storage",

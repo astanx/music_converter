@@ -1,14 +1,28 @@
 import React, { useState } from "react";
 import { Music, useMusicStore } from "../state/useMusicStore.ts";
 import withAuth from "./hoc/withAuth.tsx";
+import { useUserStore } from "../state/useUserStore.ts";
 
 const MusicConverter: React.FC = () => {
   const convertMusic = useMusicStore((state) => state.convertMusic);
-  const [music, setMusic] = useState("");
-  const [converterMusic, setConverterMusic] = useState("");
-  const handleConvertMusic = (music: Music) => {
-    setConverterMusic(convertMusic(music));
+  const [music, setMusic] = useState<Music[]>([]);
+  const [convertedMusic, setConvertedMusic] = useState("");
+  const userId = useUserStore((state) => state.userId)
+
+  const handleConvertMusic = async () => {
+    if (music.length > 0) {
+      setConvertedMusic(await convertMusic(music, userId));
+      setMusic([])
+    }
   };
+  const handleFileChange = (e) => {
+    setMusic((prevFiles) => [...prevFiles, e.target.files[0]]);
+    setConvertedMusic("");
+  };
+  const handleDeleteFile = (file) => {
+    setMusic((prevFiles) => prevFiles.filter((f) => f.name !== file.name));
+  };
+
   return (
     <div className="container mt-5">
       <div className="row justify-content-center">
@@ -19,12 +33,13 @@ const MusicConverter: React.FC = () => {
               type="file"
               className="form-control mt-2 mb-2"
               id="sheetMusic"
-              onChange={(e) => setMusic(e.target.files[0])}
+              multiple
+              onChange={handleFileChange}
             />
           </div>
           <button
             className="btn btn-primary btn-block"
-            onClick={() => handleConvertMusic(music)}
+            onClick={handleConvertMusic}
           >
             Конвертировать
           </button>
@@ -32,9 +47,35 @@ const MusicConverter: React.FC = () => {
       </div>
       <div className="row justify-content-center mt-4">
         <div className="col-md-6">
+          <h3>Загруженные файлы:</h3>
+          <ul>
+            {music.map((file, index) => (
+              <li key={index}>
+                <span>{file.name}</span>
+                <i
+                  className="fas fa-times m-2"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleDeleteFile(file)}
+                ></i>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="col-md-6">
           <h3>Результат:</h3>
           <div className="result-box border p-3">
-            <p>{converterMusic || "Здесь будет музыка..."}</p>
+            {convertedMusic ? (
+              <audio id="audioPlayer" controls>
+                <source
+                  id="audioSource"
+                  src={convertedMusic}
+                  type="audio/wav"
+                />
+                Ваш браузер не поддерживает аудиоплеер.
+              </audio>
+            ) : (
+              <p>{"Здесь будет музыка..."}</p>
+            )}
           </div>
         </div>
       </div>

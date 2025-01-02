@@ -20,16 +20,13 @@ export const ConverterAPI = {
     const response = await intenseJSON.post("/login", { name, password });
     return response;
   },
-  convertMusic: async (music: Music) => {
-    console.log(music);
-    
+  convertMusic: async (music: Music[], userId: number) => {
     const formData = new FormData();
-    formData.append("file", music);
-    formData.forEach((value, key) => {
-      console.log(key, value);
+    music.forEach((file) => {
+        formData.append(`files`, file);
     });
-    
-    const response = await intenseFORM.post("/music_converter", formData);
-    return response
-  },
+
+    const response = await intenseFORM.post(`/music_converter/${userId}`, formData);
+    return response.data.url;
+},
 };
