@@ -23,10 +23,17 @@ export const ConverterAPI = {
   convertMusic: async (music: Music[], userId: number) => {
     const formData = new FormData();
     music.forEach((file) => {
-        formData.append(`files`, file);
+      formData.append(`files`, file);
     });
 
-    const response = await intenseFORM.post(`/music_converter/${userId}`, formData);
-    return response.data.url;
-},
+    const response = await intenseFORM.post(
+      `/music_converter/${userId}`,
+      formData
+    );
+    return response.data;
+  },
+  getHistory: async (userId: number) => {
+    const response = await intenseJSON.get(`/history/${userId}`);
+    return response.data;
+  }
 };

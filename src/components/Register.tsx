@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useUserStore } from "../state/useUserStore.ts";
 import { useNavigate, Link } from "react-router-dom";
@@ -11,6 +11,7 @@ const Register = () => {
   } = useForm();
   const registerUser = useUserStore((state) => state.registerUser);
   const isLogined = useUserStore((state) => state.isLogined);
+  const [error, setError] = useState(null)
   const navigate = useNavigate();
   useEffect(() => {
     if (isLogined) {
@@ -18,8 +19,11 @@ const Register = () => {
     }
   }, [isLogined, navigate]);
 
-  const submit = (data) => {
-    registerUser(data.userName, data.password);
+  const submit = async(data) => {
+    const response = await registerUser(data.userName, data.password);
+    if (response.error){
+      setError(response.message)
+    }
   };
 
   return (
@@ -59,6 +63,11 @@ const Register = () => {
           {errors.password && (
             <div className="invalid-feedback">{errors.password.message}</div>
           )}
+          {error && (
+  <div className="alert alert-danger mt-3 text-center" role="alert">
+    {error}
+  </div>
+)}
         </div>
 
         <button type="submit" className="btn btn-primary w-100">
