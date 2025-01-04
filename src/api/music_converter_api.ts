@@ -14,25 +14,33 @@ const intenseFORM = axios.create({
 export type ResponseType<D> = {
   error: boolean;
   message: string;
-} & D
+} & D;
 
 export type LoginType = {
   name: string;
   id: number;
-}
+};
 export type ConvertType = {
   music: string;
-}
+};
 export type HistoryType = {
-  music: {music: Music, id: number}[]
-}
+  music: { music: Music; id: number }[];
+  totalCount: number;
+  totalPages: number;
+};
 export const ConverterAPI = {
   registerUser: async (name: string, password: string) => {
-    const response = await intenseJSON.post<ResponseType<LoginType>>("/users", { name, password });
+    const response = await intenseJSON.post<ResponseType<LoginType>>("/users", {
+      name,
+      password,
+    });
     return response;
   },
   login: async (name: string, password: string) => {
-    const response = await intenseJSON.post<ResponseType<LoginType>>("/login", { name, password });
+    const response = await intenseJSON.post<ResponseType<LoginType>>("/login", {
+      name,
+      password,
+    });
     return response;
   },
   convertMusic: async (music: Music[], userId: number) => {
@@ -47,12 +55,16 @@ export const ConverterAPI = {
     );
     return response.data;
   },
-  getHistory: async (userId: number) => {
-    const response = await intenseJSON.get<ResponseType<HistoryType>>(`/history/${userId}`);
+  getHistory: async (userId: number, currentPage: number, pageSize: number) => {
+    const response = await intenseJSON.get<ResponseType<HistoryType>>(
+      `/history/${userId}?page=${currentPage}&pageSize=${pageSize}`
+    );
     return response.data;
   },
-  deleteFile: async (fileId: number) => {
-    const response = await intenseJSON.delete<ResponseType<HistoryType>>(`/history/${fileId}`);
+  deleteFile: async (userId: number, fileId: number, pageSize: number = 3) => {
+    const response = await intenseJSON.delete<ResponseType<HistoryType>>(
+      `/history/${userId}/${fileId}?pageSize=${pageSize}`
+    );
     return response.data;
-  }
+  },
 };
