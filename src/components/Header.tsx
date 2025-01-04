@@ -16,7 +16,7 @@ const Header = () => {
           <i className="fas fa-history icon-large"></i>
         </Link>
       </div>
-      <h1 className="col-6">Преобразователь музыки</h1>
+      <h1 className="col-6 text-center">Преобразователь музыки</h1>
       {isLogined && (
         <div className="col-3 text-end">
           <span className="fs-4">{userName}</span>
