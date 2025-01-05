@@ -38,8 +38,7 @@ export const useMusicStore = create<Store>()((set) => ({
       set(() => ({ isLoading: true }));
       const response = await ConverterAPI.convertMusic(music, userId);
       if (!response.error) {
-        set((state) => ({
-          music: [...state.music, { music: response.music, id: 1 }],
+        set(() => ({
           convertedMusic: response.music,
         }));
       }

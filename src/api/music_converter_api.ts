@@ -37,7 +37,7 @@ export const ConverterAPI = {
     return response;
   },
   login: async (name: string, password: string) => {
-    const response = await intenseJSON.post<ResponseType<LoginType>>("/login", {
+    const response = await intenseJSON.post<ResponseType<LoginType>>("/users/login", {
       name,
       password,
     });
@@ -50,20 +50,20 @@ export const ConverterAPI = {
     });
 
     const response = await intenseFORM.post<ResponseType<ConvertType>>(
-      `/music_converter/${userId}`,
+      `/music/music_converter/${userId}`,
       formData
     );
     return response.data;
   },
   getHistory: async (userId: number, currentPage: number, pageSize: number) => {
     const response = await intenseJSON.get<ResponseType<HistoryType>>(
-      `/history/${userId}?page=${currentPage}&pageSize=${pageSize}`
+      `/music/history/${userId}?page=${currentPage}&pageSize=${pageSize}`
     );
     return response.data;
   },
   deleteFile: async (userId: number, fileId: number, pageSize: number = 3) => {
     const response = await intenseJSON.delete<ResponseType<HistoryType>>(
-      `/history/${userId}/${fileId}?pageSize=${pageSize}`
+      `/music/history/${userId}/${fileId}?pageSize=${pageSize}`
     );
     return response.data;
   },
