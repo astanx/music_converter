@@ -9,15 +9,11 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const loginUser = useUserStore((state) => state.loginUser);
-  const isLogined = useUserStore((state) => state.isLogined);
+
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (isLogined) {
-      navigate("/music_converter");
-    }
-  }, [isLogined, navigate]);
+  const isLogined = useUserStore((state) => state.isLogined);
+
+  const loginUser = useUserStore((state) => state.loginUser);
 
   const submit = async (data) => {
     const response = await loginUser(data.userName, data.password);
@@ -25,6 +21,13 @@ const Login = () => {
       setError(response.message);
     }
   };
+
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (isLogined) {
+      navigate("/music_converter");
+    }
+  }, [isLogined, navigate]);
 
   return (
     <div className="container mt-5">
@@ -35,6 +38,7 @@ const Login = () => {
             Имя пользователя
           </label>
           <input
+            autoComplete="username"
             className={`form-control ${errors.userName ? "is-invalid" : ""}`}
             id="userName"
             placeholder="Введите ваше имя пользователя"
@@ -52,6 +56,7 @@ const Login = () => {
             Пароль
           </label>
           <input
+            autoComplete="current-password"
             type="password"
             className={`form-control ${errors.password ? "is-invalid" : ""}`}
             id="password"
@@ -69,7 +74,7 @@ const Login = () => {
             </div>
           )}
         </div>
-        <button type="submit" className="btn btn-primary w-100">
+        <button type="submit" className="btn btn-secondary w-100">
           Войти
         </button>
       </form>

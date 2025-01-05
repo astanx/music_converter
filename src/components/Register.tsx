@@ -11,7 +11,7 @@ const Register = () => {
   } = useForm();
   const registerUser = useUserStore((state) => state.registerUser);
   const isLogined = useUserStore((state) => state.isLogined);
-  const [error, setError] = useState(null)
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
   useEffect(() => {
     if (isLogined) {
@@ -19,10 +19,10 @@ const Register = () => {
     }
   }, [isLogined, navigate]);
 
-  const submit = async(data) => {
+  const submit = async (data) => {
     const response = await registerUser(data.userName, data.password);
-    if (response.error){
-      setError(response.message)
+    if (response.error) {
+      setError(response.message);
     }
   };
 
@@ -35,6 +35,7 @@ const Register = () => {
             Имя пользователя
           </label>
           <input
+            autoComplete="username"
             className={`form-control ${errors.userName ? "is-invalid" : ""}`}
             id="userName"
             placeholder="Введите ваше имя пользователя"
@@ -52,6 +53,7 @@ const Register = () => {
             Пароль
           </label>
           <input
+            autoComplete="current-password"
             type="password"
             className={`form-control ${errors.password ? "is-invalid" : ""}`}
             id="password"
@@ -64,13 +66,13 @@ const Register = () => {
             <div className="invalid-feedback">{errors.password.message}</div>
           )}
           {error && (
-  <div className="alert alert-danger mt-3 text-center" role="alert">
-    {error}
-  </div>
-)}
+            <div className="alert alert-danger mt-3 text-center" role="alert">
+              {error}
+            </div>
+          )}
         </div>
 
-        <button type="submit" className="btn btn-primary w-100">
+        <button type="submit" className="btn btn-secondary w-100">
           Зарегистрироваться
         </button>
       </form>

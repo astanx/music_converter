@@ -46,13 +46,13 @@ const MusicConverter: React.FC = () => {
             />
           </div>
           <button
-            className={`btn btn-primary btn-block ${
+            className={`btn btn-secondary btn-block ${
               isLoading ? "disabled" : ""
             }`}
             onClick={handleConvertMusic}
             disabled={isLoading}
           >
-            {isLoading ? "Конвертация..." : "Конвертировать"}
+            Конвертировать
           </button>
         </div>
       </div>

@@ -3,11 +3,11 @@ import { useMusicStore } from "../state/useMusicStore.ts";
 
 const Pagination = () => {
   const pages: number[] = [];
-  
+
   const totalPages = useMusicStore((state) => state.totalPages);
   const currentPage = useMusicStore((state) => state.currentPage);
   const onPageChange = useMusicStore((state) => state.changePage);
-  
+
   for (let i = 1; i <= totalPages; i++) {
     pages.push(i);
   }
