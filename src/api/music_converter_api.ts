@@ -21,10 +21,10 @@ export type LoginType = {
   id: number;
 };
 export type ConvertType = {
-  music: string;
+  url: string;
 };
 export type HistoryType = {
-  music: { music: Music; id: number }[];
+  url: { url: Music; id: number }[];
   totalCount: number;
   totalPages: number;
 };

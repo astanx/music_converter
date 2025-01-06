@@ -82,7 +82,7 @@ const MusicConverter: React.FC = () => {
               <audio id="audioPlayer" controls>
                 <source
                   id="audioSource"
-                  src={`data:audio/wav;base64,${convertedMusic}`}
+                  src={convertedMusic}
                   type="audio/wav"
                 />
                 Ваш браузер не поддерживает аудиоплеер.

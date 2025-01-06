@@ -6,7 +6,7 @@ import {
 } from "../api/music_converter_api.ts";
 
 export type Music = string;
-export type MusicState = { music: Music; id: number };
+export type MusicState = { url: Music; id: number };
 
 interface Store {
   music: MusicState[];
@@ -39,7 +39,7 @@ export const useMusicStore = create<Store>()((set) => ({
       const response = await ConverterAPI.convertMusic(music, userId);
       if (!response.error) {
         set(() => ({
-          convertedMusic: response.music,
+          convertedMusic: response.url,
         }));
       }
       set(() => ({ isLoading: false }));
@@ -62,7 +62,7 @@ export const useMusicStore = create<Store>()((set) => ({
       set(() => ({ currentPage: 1 }));
     }
     set(() => ({
-      music: response.music,
+      music: response.url,
       isLoading: false,
       totalPages: response.totalPages,
     }));

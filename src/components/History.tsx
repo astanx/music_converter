@@ -39,7 +39,7 @@ const History = () => {
                 <div className="d-flex justify-content-between align-items-center">
                   <audio controls className="w-100 rounded">
                     <source
-                      src={`data:audio/wav;base64,${mus.music}`}
+                      src={mus.url}
                       type="audio/wav"
                     />
                     Ваш браузер не поддерживает аудиоплеер.
