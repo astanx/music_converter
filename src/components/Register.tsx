@@ -20,10 +20,17 @@ const Register = () => {
   }, [isLogined, navigate]);
 
   const submit = async (data) => {
-    const response = await registerUser(data.userName, data.password);
-    if (response.error) {
-      setError(response.message);
+    if (data.userName.trim().length < 6 || data.password.trim().length < 6){
+      setError('Минимальная длина - 6 символов')
     }
+    else{
+      const response = await registerUser(data.userName.trim(), data.password.trim());
+      if (response.error) {
+        setError(response.message);
+      }
+    }
+    
+    
   };
 
   return (
