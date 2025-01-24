@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/music_converter/static/css/main.2c7ec043.css",
-    "main.js": "/music_converter/static/js/main.6e51778d.js",
+    "main.css": "/music_converter/static/css/main.b407e167.css",
+    "main.js": "/music_converter/static/js/main.e58df0fe.js",
     "static/media/fa-solid-900.ttf": "/music_converter/static/media/fa-solid-900.2582b0e4bcf85eceead0.ttf",
     "static/media/fa-brands-400.ttf": "/music_converter/static/media/fa-brands-400.1815e00441357e01619e.ttf",
     "static/media/fa-solid-900.woff2": "/music_converter/static/media/fa-solid-900.2463b90d9a316e4e5294.woff2",
@@ -11,11 +11,11 @@
     "static/media/fa-v4compatibility.ttf": "/music_converter/static/media/fa-v4compatibility.da94ef451f4969af06e6.ttf",
     "static/media/fa-v4compatibility.woff2": "/music_converter/static/media/fa-v4compatibility.ea8f94e1d22e0d35ccd4.woff2",
     "index.html": "/music_converter/index.html",
-    "main.2c7ec043.css.map": "/music_converter/static/css/main.2c7ec043.css.map",
-    "main.6e51778d.js.map": "/music_converter/static/js/main.6e51778d.js.map"
+    "main.b407e167.css.map": "/music_converter/static/css/main.b407e167.css.map",
+    "main.e58df0fe.js.map": "/music_converter/static/js/main.e58df0fe.js.map"
   },
   "entrypoints": [
-    "static/css/main.2c7ec043.css",
-    "static/js/main.6e51778d.js"
+    "static/css/main.b407e167.css",
+    "static/js/main.e58df0fe.js"
   ]
 }
