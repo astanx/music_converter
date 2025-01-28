@@ -30,6 +30,8 @@ npm install
 
 npm start
 
+Для демонстрации всех функций надо запустить [сервер](https://github.com/ivan-astan/music_converter_server) и в music_converter/src/api/music_converter_api.ts заменить baseURL в intense на url запущенного сервера
+
 Демонстрация
 
 Видеоролик, демонстрирующий работу приложения, доступен по ссылке:
